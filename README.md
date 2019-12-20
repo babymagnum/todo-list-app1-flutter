@@ -10,11 +10,12 @@ Follow these 2 website to make your current flutter project to support flutter w
 
 # Getting Started
 
-1. After clone the project, change the name of the folder
-2. flutter channel master -> change to channel master to best support
-3. flutter pub get -> get the packages defined in pubspec.yaml class
-4. flutter clean -> clean the flutter project
-5. Change app name from android manifest or ios build file
+1. Change the git remote url with your current repo url `git remote set-url origin https://github.com/USERNAME/REPOSITORY.git` -> remove the quote mark
+2. After clone the project, change the name of the folder
+3. flutter channel master -> change to channel master to best support
+4. flutter pub get -> get the packages defined in pubspec.yaml class
+5. flutter clean -> clean the flutter project
+6. Change app name from android manifest or ios build file
 
 # Basic packages used
 
