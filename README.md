@@ -16,6 +16,7 @@ Follow these 2 website to make your current flutter project to support flutter w
 4. flutter pub get -> get the packages defined in pubspec.yaml class
 5. flutter clean -> clean the flutter project
 6. Change app name from android manifest or ios build file
+7. Change app icon -> set url of the icon you want to use in pubspec.yaml file, then run "flutter pub run flutter_launcher_icons:main"
 
 # Basic packages used
 
