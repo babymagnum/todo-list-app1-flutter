@@ -8,6 +8,8 @@ void main() {
   runApp(MyApp());
 }
 
+final globalNavigatorKey = GlobalKey<NavigatorState>();
+
 class MyApp extends StatelessWidget {
 
   /* Don't forget to change BASE_API to Constant.API_PRODUCTION when building apk / when testing live server */
@@ -15,14 +17,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // this code to make apps to only allows portrait mode
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+    
     return MaterialApp(
-      title: 'Flutter Demo',
+      navigatorKey: globalNavigatorKey,
       initialRoute: Router.initialRoute,
       debugShowCheckedModeBanner: false,
       onGenerateRoute: Router.generateRoute,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
     );
   }
 }
