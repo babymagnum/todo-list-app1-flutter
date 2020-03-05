@@ -10,8 +10,8 @@ Follow these 2 website to make your current flutter project to support flutter w
 
 # Getting Started
 
-1. Change the git remote url with your current repo url `git remote set-url origin https://github.com/USERNAME/REPOSITORY.git`
-2. Change the name of the folder
+1. Change the name of the folder
+2. Change the git remote url with your current repo url `git remote set-url origin https://github.com/USERNAME/REPOSITORY.git`
 3. run `flutter channel master` in terminal -> change to channel master to best support
 4. run `flutter pub get` in terminal -> get the packages defined in pubspec.yaml class
 5. run `flutter clean` in terminal -> clean the flutter project
