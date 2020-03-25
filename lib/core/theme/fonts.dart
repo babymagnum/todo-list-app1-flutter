@@ -13,4 +13,16 @@ class Fonts {
   static const FontWeight robotoBold = FontWeight.w700;
   static const FontWeight robotoLight = FontWeight.w300;
   static const FontWeight robotoThin = FontWeight.w100;
+
+  static const String rubik = 'Rubik';
+  static const FontWeight rubikRegular = FontWeight.w400;
+  static const FontWeight rubikMedium = FontWeight.w500;
+  static const FontWeight rubikBold = FontWeight.w700;
+  static const FontWeight rubikLight = FontWeight.w300;
+
+  static const String openSans = 'OpenSans';
+  static const FontWeight openSansRegular = FontWeight.w400;
+  static const FontWeight openSansMedium = FontWeight.w500;
+  static const FontWeight openSansBold = FontWeight.w700;
+  static const FontWeight openSansLight = FontWeight.w300;
 }
