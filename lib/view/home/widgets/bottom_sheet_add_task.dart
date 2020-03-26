@@ -146,7 +146,7 @@ class _BottomSheetAddTaskState extends State<BottomSheetAddTask> {
                     )
                   ),
                 ),
-                SizedBox(height: _titleFocus.hasFocus ? 400 : 20,)
+                SizedBox(height: _titleFocus.hasFocus ? MediaQuery.of(context).viewInsets.bottom + 20 : 20,)
               ],
             ),
           )
