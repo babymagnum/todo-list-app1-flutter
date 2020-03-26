@@ -1,7 +1,10 @@
+import 'package:dribbble_clone/core/helper/locator.dart';
 import 'package:dribbble_clone/core/theme/theme_text_style.dart';
 import 'package:dribbble_clone/view/home/home_view.dart';
+import 'package:dribbble_clone/view/home/widgets/bottom_sheet_add_task.dart';
 import 'package:dribbble_clone/view/task/task_view.dart';
 import 'package:flutter/material.dart';
+import '../home/stores/home_stores.dart';
 
 class ContainerView extends StatefulWidget {
 
@@ -13,11 +16,21 @@ class ContainerView extends StatefulWidget {
 
 class _ContainerViewState extends State<ContainerView> {
 
-  var selectedIndex = 0;
+  var _selectedIndex = 0;
   List<Widget> _listScreen = [HomeView(), TaskView()];
 
-  onItemTapped(int index) {
-    setState(() => selectedIndex = index);
+  _onItemTapped(int index) {
+    setState(() => _selectedIndex = index);
+  }
+
+  _openBottomSheetAddTask() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      barrierColor: Color(0xFF212020).withOpacity(0.24),
+      backgroundColor: Colors.transparent,
+      builder: (context) => BottomSheetAddTask()
+    );
   }
 
   @override
@@ -28,7 +41,7 @@ class _ContainerViewState extends State<ContainerView> {
           Positioned(
             left: 0, top: 0, right: 0, bottom: 59,
             child: IndexedStack(
-              index: selectedIndex,
+              index: _selectedIndex,
               children: _listScreen,
             ),
           ),
@@ -45,7 +58,7 @@ class _ContainerViewState extends State<ContainerView> {
                         Image.asset('assets/images/ic_home.png', width: 23, height: 23,),
                         SizedBox(height: 6,),
                         Text('Home', style: ThemeTextStyle.rubikM.apply(
-                          color: selectedIndex == 0 ? Color(0xFF5F87E7) : Color(0xFF9F9F9F), fontSizeDelta: -6
+                          color: _selectedIndex == 0 ? Color(0xFF5F87E7) : Color(0xFF9F9F9F), fontSizeDelta: -6
                         ),)
                       ],
                     )
@@ -59,7 +72,7 @@ class _ContainerViewState extends State<ContainerView> {
                         Image.asset('assets/images/ic_task.png', width: 23, height: 23,),
                         SizedBox(height: 6,),
                         Text('Task', style: ThemeTextStyle.rubikM.apply(
-                          color: selectedIndex == 1 ? Color(0xFF5F87E7) : Color(0xFF9F9F9F), fontSizeDelta: -6
+                          color: _selectedIndex == 1 ? Color(0xFF5F87E7) : Color(0xFF9F9F9F), fontSizeDelta: -6
                         ),)
                       ],
                     )
@@ -70,9 +83,12 @@ class _ContainerViewState extends State<ContainerView> {
           ),
           Align(
             alignment: Alignment.bottomCenter,
-            child: Padding(
-              padding: EdgeInsets.only(bottom: 13),
-              child: Image.asset('assets/images/button_add.png'),
+            child: GestureDetector(
+              onTap: () => _openBottomSheetAddTask(),
+              child: Padding(
+                padding: EdgeInsets.only(bottom: 13),
+                child: Image.asset('assets/images/button_add.png'),
+              ),
             ),
           )
         ],
