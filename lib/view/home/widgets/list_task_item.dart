@@ -1,4 +1,3 @@
-import 'package:circular_check_box/circular_check_box.dart';
 import 'package:division/division.dart';
 import 'package:dribbble_clone/core/helper/text_util.dart';
 import 'package:dribbble_clone/core/theme/theme_text_style.dart';
@@ -26,83 +25,68 @@ class ListTaskItem extends StatelessWidget {
     else return Color(0xFF3044F2);
   }
 
-  bool _isShowHeader() {
-    if (itemBefore == null) return true;
-    else {
-      if (TextUtil.convertDateStringToAnotherFormat(item.date, 'dd-MM-yyyy', 'dd-MM-yyyy HH:mm') !=
-        TextUtil.convertDateStringToAnotherFormat(itemBefore.date, 'dd-MM-yyyy', 'dd-MM-yyyy HH:mm')) return true;
-      else return false;
-    }
-  }
-
-  String _headerContent() {
-    if (itemBefore == null) return 'Today';
-    else {
-      if (item.date != itemBefore.date) return 'Tomorrow';
-      else return '';
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-        top: isFirst ? 0 : _isShowHeader() ? 25 : 13,
+    return Container(
+      margin: EdgeInsets.only(
+        top: 7.5,
         left: 18,
         right: 18,
-        bottom: isLast ? 45 : 0
+        bottom: 7.5
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Stack(
         children: <Widget>[
-          _isShowHeader() ?
-          Text(_headerContent(), style: ThemeTextStyle.rubikM.apply(fontSizeDelta: -3, color: Color(0xFF8B87B3)),) :
-          Container(),
-          SizedBox(height: _isShowHeader() ? 16 : 0),
-          Stack(
-            children: <Widget>[
-              Positioned(
-                left: 0, top: 0, bottom: 0,
-                child: Container(
-                  width: 4,
-                  decoration: BoxDecoration(
-                    color: _getColor(),
-                    borderRadius: BorderRadius.only(topLeft: Radius.circular(5), bottomLeft: Radius.circular(5))
-                  ),
-                )
+          Positioned(
+            left: 0, top: 0, bottom: 0,
+            child: Container(
+              width: 4,
+              decoration: BoxDecoration(
+                color: _getColor(),
+                borderRadius: BorderRadius.only(topLeft: Radius.circular(5), bottomLeft: Radius.circular(5))
               ),
-              Parent(
-                style: ParentStyle()..borderRadius(topRight: 5, bottomRight: 5)..background.color(Colors.white)..boxShadow(color: Colors.black.withOpacity(0.05), offset: Offset(1, 1), blur: 3)
-                  ..padding(vertical: 8)..margin(left: 4),
-                child: Row(
-                  children: <Widget>[
-                    SizedBox(width: 3),
-                    CustomCircularCheckBox(
-                      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                      activeColor: Color(0xFF91DC5A),
-                      value: item.isCheck,
-                      inactiveColor: Color(0xFFB5B5B5),
-                      onChanged: (value) => onCheckChanged(value)
-                    ),
-                    SizedBox(width: 10,),
-                    Text(
-                      TextUtil.convertDateStringToAnotherFormat(item.date, 'HH.mm a', 'dd-MM-yyyy HH:mm'),
-                      style: ThemeTextStyle.rubikR.apply(fontSizeDelta: -5, color: Color(0xFFC6C6C8)),
-                    ),
-                    SizedBox(width: 10,),
-                    Expanded(
-                      child: Text(item.title, maxLines: 2, overflow: TextOverflow.ellipsis, style: ThemeTextStyle.rubikM.apply(fontSizeDelta: -2, color: Color(0xFF554E8F)),)
-                    ),
-                    SizedBox(width: 10,),
-                    GestureDetector(
-                      onTap: () => onNotifyChanged(!item.isNotify),
-                      child: Image.asset('assets/images/ic_bell.png', color: item.isNotify ? Color(0xFFFFDC00) : Color(0xFFD9D9D9),)
-                    ),
-                    SizedBox(width: 8,)
-                  ],
+            )
+          ),
+          Parent(
+            style: ParentStyle()..borderRadius(topRight: 5, bottomRight: 5)..background.color(Colors.white)..boxShadow(color: Colors.black.withOpacity(0.05), offset: Offset(1, 1), blur: 3)
+              ..padding(vertical: 8)..margin(left: 4),
+            child: Row(
+              children: <Widget>[
+                SizedBox(width: 3),
+                CustomCircularCheckBox(
+                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  activeColor: Color(0xFF91DC5A),
+                  value: item.isCheck,
+                  inactiveColor: Color(0xFFB5B5B5),
+                  onChanged: (value) => onCheckChanged(value)
                 ),
-              )
-            ],
+                SizedBox(width: 10,),
+                Text(
+                  TextUtil.convertDateStringToAnotherFormat(item.date, 'HH.mm a', 'dd-MM-yyyy HH:mm'),
+                  style: ThemeTextStyle.rubikR.apply(fontSizeDelta: -5, color: Color(0xFFC6C6C8)),
+                ),
+                SizedBox(width: 10,),
+                Expanded(
+                  child: Stack(
+                    children: <Widget>[
+                      Text(
+                        item.title,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: item.isCheck ?
+                        ThemeTextStyle.rubikR.apply(fontSizeDelta: -2, color: Color(0xFFD9D9D9), decoration: TextDecoration.lineThrough) :
+                        ThemeTextStyle.rubikM.apply(fontSizeDelta: -2, color: Color(0xFF554E8F))
+                      )
+                    ],
+                  )
+                ),
+                SizedBox(width: 10,),
+                GestureDetector(
+                  onTap: () => onNotifyChanged(!item.isNotify),
+                  child: Image.asset('assets/images/ic_bell.png', color: item.isNotify ? Color(0xFFFFDC00) : Color(0xFFD9D9D9),)
+                ),
+                SizedBox(width: 10,)
+              ],
+            ),
           )
         ],
       ),

@@ -4,6 +4,7 @@ import 'package:dribbble_clone/view/home/widgets/list_task_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import '../../core/theme/theme_text_style.dart';
 import '../../core/widgets/placeholder_network_image.dart';
 import 'stores/home_stores.dart';
@@ -165,26 +166,57 @@ class _HomeViewState extends State<HomeView> {
                   ) :
                   NotificationListener(
                     child: ListView.builder(
-                      itemCount: _homeStores.listTask.length,
-                      itemBuilder: (_, index) => ListTaskItem(
-                        isFirst: index == 0,
-                        onNotifyChanged: (value) {
-                          _homeStores.changeNotify(index, value);
-                          setState(() {});
-                        },
-                        onCheckChanged: (value) {
-                          _homeStores.changeCheck(index, value);
-                          setState(() {});
-                        },
-                        isLast: index == _homeStores.listTask.length - 1,
-                        item: _homeStores.listTask[index],
-                        itemBefore: index == 0 ? null : _homeStores.listTask[index - 1],
-                      )
+                      itemCount: _homeStores.listTask.length + 1,
+                      itemBuilder: (_, index) {
+                        if (index == _homeStores.listTask.length) {
+                          return SizedBox(height: 35);
+                        } else {
+                          if (_homeStores.listTask[index].header != '') {
+                            return Padding(
+                              padding: EdgeInsets.only(left: 18, top: index == 0 ? 0 : 18, bottom: 8.5),
+                              child: Text(_homeStores.listTask[index].header, style: ThemeTextStyle.rubikM.apply(fontSizeDelta: -3, color: Color(0xFF8B87B3)),),
+                            );
+                          } else {
+                            return Slidable(
+                              closeOnScroll: false,
+                              actionExtentRatio: 0.17,
+                              secondaryActions: <Widget>[
+                                Align(
+                                  child: Parent(
+                                    gesture: Gestures()..onTap(() {}),
+                                    style: ParentStyle()..height(35)..width(35)..borderRadius(all: 35/2)..background.color(Color(0xFFFFCFCF))
+                                      ..ripple(true)..margin(right: 33),
+                                    child: Center(
+                                      child: Image.asset('assets/images/ic_trash.png'),
+                                    ),
+                                  ),
+                                  alignment: Alignment.center,
+                                )
+                              ],
+                              child: ListTaskItem(
+                                isFirst: index == 0,
+                                onNotifyChanged: (value) {
+                                  _homeStores.changeNotify(index, value);
+                                  setState(() {});
+                                },
+                                onCheckChanged: (value) {
+                                  _homeStores.changeCheck(index, value);
+                                  setState(() {});
+                                },
+                                isLast: index == _homeStores.listTask.length - 1,
+                                item: _homeStores.listTask[index],
+                                itemBefore: index == 0 ? null : _homeStores.listTask[index - 1],
+                              ),
+                              actionPane: SlidableDrawerActionPane()
+                            );
+                          }
+                        }
+                      }
                     )
                   )
                 ],
               )
-            )
+            ),
           ],
         ),
       ),
