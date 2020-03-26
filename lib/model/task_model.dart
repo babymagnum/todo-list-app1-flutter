@@ -4,7 +4,7 @@ class TaskModel {
 
   String date;
   String title;
-  String isCheck;
-  String isNotify;
+  bool isCheck;
+  bool isNotify;
   String type;
 }

@@ -1,5 +1,7 @@
 import 'package:division/division.dart';
 import 'package:dribbble_clone/core/helper/locator.dart';
+import 'package:dribbble_clone/view/home/widgets/list_task_item.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import '../../core/theme/theme_text_style.dart';
@@ -17,6 +19,17 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
 
   var _homeStores = locator<HomeStores>();
+
+  @override
+  void initState() {
+
+    Future.delayed(Duration.zero, () {
+      // comment below code if want to see empty task view //
+      _homeStores.populateListTask();
+    });
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -128,6 +141,15 @@ class _HomeViewState extends State<HomeView> {
             Expanded(
               child: Stack(
                 children: <Widget>[
+                  _homeStores.isLoading ?
+                  Align(
+                    child: SizedBox(
+                      width: 50, height: 50,
+                      child: CircularProgressIndicator(),
+                    ),
+                    alignment: Alignment.topCenter,
+                  ) :
+                  _homeStores.listTask.length == 0 ?
                   Align(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -140,6 +162,25 @@ class _HomeViewState extends State<HomeView> {
                       ],
                     ),
                     alignment: Alignment.center,
+                  ) :
+                  NotificationListener(
+                    child: ListView.builder(
+                      itemCount: _homeStores.listTask.length,
+                      itemBuilder: (_, index) => ListTaskItem(
+                        isFirst: index == 0,
+                        onNotifyChanged: (value) {
+                          _homeStores.changeNotify(index, value);
+                          setState(() {});
+                        },
+                        onCheckChanged: (value) {
+                          _homeStores.changeCheck(index, value);
+                          setState(() {});
+                        },
+                        isLast: index == _homeStores.listTask.length - 1,
+                        item: _homeStores.listTask[index],
+                        itemBefore: index == 0 ? null : _homeStores.listTask[index - 1],
+                      )
+                    )
                   )
                 ],
               )
