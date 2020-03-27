@@ -109,11 +109,11 @@ class _HomeViewState extends State<HomeView> {
                                 isFirst: index == 0,
                                 onNotifyChanged: (value) {
                                   _homeStores.changeNotify(index, value);
-                                  //setState(() {});
+                                  setState(() {});
                                 },
                                 onCheckChanged: (value) {
                                   _homeStores.changeCheck(index, value);
-                                  //setState(() {});
+                                  setState(() {});
                                 },
                                 isLast: index == _homeStores.listTask.length - 1,
                                 item: _homeStores.listTask[index],

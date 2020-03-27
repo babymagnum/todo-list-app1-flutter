@@ -28,70 +28,68 @@ class ListTaskItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Observer(
-      builder: (_) => Container(
-        margin: EdgeInsets.only(
-          top: 7.5,
-          left: 18,
-          right: 18,
-          bottom: 7.5
-        ),
-        child: Stack(
-          children: <Widget>[
-            Positioned(
-              left: 0, top: 0, bottom: 0,
-              child: Container(
-                width: 4,
-                decoration: BoxDecoration(
-                  color: _getColor(),
-                  borderRadius: BorderRadius.only(topLeft: Radius.circular(5), bottomLeft: Radius.circular(5))
-                ),
-              )
-            ),
-            Parent(
-              style: ParentStyle()..borderRadius(topRight: 5, bottomRight: 5)..background.color(Colors.white)..boxShadow(color: Colors.black.withOpacity(0.05), offset: Offset(1, 1), blur: 3)
-                ..padding(vertical: 8)..margin(left: 4),
-              child: Row(
-                children: <Widget>[
-                  SizedBox(width: 3),
-                  CustomCircularCheckBox(
-                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                    activeColor: Color(0xFF91DC5A),
-                    value: item.isCheck,
-                    inactiveColor: Color(0xFFB5B5B5),
-                    onChanged: (value) => onCheckChanged(value)
-                  ),
-                  SizedBox(width: 10,),
-                  Text(
-                    TextUtil.convertDateStringToAnotherFormat(item.date, 'HH.mm a', 'dd-MM-yyyy HH:mm'),
-                    style: ThemeTextStyle.rubikR.apply(fontSizeDelta: -5, color: Color(0xFFC6C6C8)),
-                  ),
-                  SizedBox(width: 10,),
-                  Expanded(
-                    child: Stack(
-                      children: <Widget>[
-                        Text(
-                          item.title,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: item.isCheck ?
-                          ThemeTextStyle.rubikR.apply(fontSizeDelta: -2, color: Color(0xFFD9D9D9), decoration: TextDecoration.lineThrough) :
-                          ThemeTextStyle.rubikM.apply(fontSizeDelta: -2, color: Color(0xFF554E8F))
-                        )
-                      ],
-                    )
-                  ),
-                  SizedBox(width: 10,),
-                  GestureDetector(
-                    onTap: () => onNotifyChanged(!item.isNotify),
-                    child: Image.asset('assets/images/ic_bell.png', color: item.isNotify ? Color(0xFFFFDC00) : Color(0xFFD9D9D9),)
-                  ),
-                  SizedBox(width: 10,)
-                ],
+    return Container(
+      margin: EdgeInsets.only(
+        top: 7.5,
+        left: 18,
+        right: 18,
+        bottom: 7.5
+      ),
+      child: Stack(
+        children: <Widget>[
+          Positioned(
+            left: 0, top: 0, bottom: 0,
+            child: Container(
+              width: 4,
+              decoration: BoxDecoration(
+                color: _getColor(),
+                borderRadius: BorderRadius.only(topLeft: Radius.circular(5), bottomLeft: Radius.circular(5))
               ),
             )
-          ],
-        ),
+          ),
+          Parent(
+            style: ParentStyle()..borderRadius(topRight: 5, bottomRight: 5)..background.color(Colors.white)..boxShadow(color: Colors.black.withOpacity(0.05), offset: Offset(1, 1), blur: 3)
+              ..padding(vertical: 8)..margin(left: 4),
+            child: Row(
+              children: <Widget>[
+                SizedBox(width: 3),
+                CustomCircularCheckBox(
+                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  activeColor: Color(0xFF91DC5A),
+                  value: item.isCheck,
+                  inactiveColor: Color(0xFFB5B5B5),
+                  onChanged: (value) => onCheckChanged(value)
+                ),
+                SizedBox(width: 10,),
+                Text(
+                  TextUtil.convertDateStringToAnotherFormat(item.date, 'HH.mm a', 'dd-MM-yyyy HH:mm'),
+                  style: ThemeTextStyle.rubikR.apply(fontSizeDelta: -5, color: Color(0xFFC6C6C8)),
+                ),
+                SizedBox(width: 10,),
+                Expanded(
+                  child: Stack(
+                    children: <Widget>[
+                      Text(
+                        item.title,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: item.isCheck ?
+                        ThemeTextStyle.rubikR.apply(fontSizeDelta: -2, color: Color(0xFFD9D9D9), decoration: TextDecoration.lineThrough) :
+                        ThemeTextStyle.rubikM.apply(fontSizeDelta: -2, color: Color(0xFF554E8F))
+                      )
+                    ],
+                  )
+                ),
+                SizedBox(width: 10,),
+                GestureDetector(
+                  onTap: () => onNotifyChanged(!item.isNotify),
+                  child: Image.asset('assets/images/ic_bell.png', color: item.isNotify ? Color(0xFFFFDC00) : Color(0xFFD9D9D9),)
+                ),
+                SizedBox(width: 10,)
+              ],
+            ),
+          )
+        ],
       ),
     );
   }
