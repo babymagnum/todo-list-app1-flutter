@@ -12,8 +12,11 @@ abstract class HomeStoresBase with Store {
   @observable
   bool isLoading = false;
 
+//  @observable
+//  List<TaskModel> listTask = List();
+
   @observable
-  List<TaskModel> listTask = List();
+  ObservableList<TaskModel> listTask = ObservableList<TaskModel>.of([]);
 
   List<TaskResponse> _listTask = [
     TaskResponse('Go jogging with Christin', '26-03-2020 07:00', 'Personal', false, false),
@@ -59,5 +62,15 @@ abstract class HomeStoresBase with Store {
   @action
   changeNotify(int index, bool value) {
     listTask[index].isNotify = value;
+  }
+
+  @action
+  addTask(TaskModel taskModel) {
+    listTask.add(taskModel);
+  }
+
+  @action
+  removeTask(int index) {
+    listTask.removeAt(index);
   }
 }

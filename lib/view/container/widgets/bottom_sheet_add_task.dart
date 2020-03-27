@@ -1,5 +1,6 @@
 import 'package:dribbble_clone/core/helper/locator.dart';
 import 'package:dribbble_clone/core/theme/theme_text_style.dart';
+import 'package:dribbble_clone/model/task_model.dart';
 import 'package:dribbble_clone/model/task_type_model.dart';
 import 'package:dribbble_clone/view/home/widgets/list_task_type_item.dart';
 import 'package:flutter/cupertino.dart';
@@ -31,11 +32,6 @@ class _BottomSheetAddTaskState extends State<BottomSheetAddTask> {
       else _listType[index].isSelected = false;
     }
     setState(() {});
-  }
-
-  _checkKeyboard() {
-    FocusScope.of(context).requestFocus(FocusNode());
-    Navigator.of(context).pop();
   }
 
   @override
@@ -122,28 +118,34 @@ class _BottomSheetAddTaskState extends State<BottomSheetAddTask> {
                   child: Text('Today, 19:00 — 21:00', style: ThemeTextStyle.rubikM.apply(fontSizeDelta: -3, color: Color(0xFF404040)),),
                 ),
                 SizedBox(height: 40,),
-                Container(
-                  padding: EdgeInsets.symmetric(vertical: 15),
-                  width: double.infinity,
-                  margin: EdgeInsets.symmetric(horizontal: 18),
-                  child: Center(
-                    child: Text('Add task', style: ThemeTextStyle.rubikM.apply(fontSizeDelta: 2, color: Colors.white),),
-                  ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(5)),
-                    boxShadow: [BoxShadow(
-                      color: Color(0xFF6894EE), offset: Offset(1, 3), blurRadius: 3
-                    )],
-                    gradient: LinearGradient(
-                      colors: [
-                        Color(0xFF7EB6FF),
-                        Color(0xFF5F87E7),
-                      ],
-                      begin: FractionalOffset(0.0, 0.0),
-                      end: FractionalOffset(1.0, 0.0),
-                      stops: [0.0, 1.0],
-                      tileMode: TileMode.clamp
-                    )
+                GestureDetector(
+                  onTap: () {
+                    _homeStores.addTask(TaskModel('Playing game', '27-03-2020 14:00', 'Personal', false, false, ''));
+                    Navigator.of(context).pop();
+                  },
+                  child: Container(
+                    padding: EdgeInsets.symmetric(vertical: 15),
+                    width: double.infinity,
+                    margin: EdgeInsets.symmetric(horizontal: 18),
+                    child: Center(
+                      child: Text('Add task', style: ThemeTextStyle.rubikM.apply(fontSizeDelta: 2, color: Colors.white),),
+                    ),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(5)),
+                      boxShadow: [BoxShadow(
+                        color: Color(0xFF6894EE), offset: Offset(1, 3), blurRadius: 3
+                      )],
+                      gradient: LinearGradient(
+                        colors: [
+                          Color(0xFF7EB6FF),
+                          Color(0xFF5F87E7),
+                        ],
+                        begin: FractionalOffset(0.0, 0.0),
+                        end: FractionalOffset(1.0, 0.0),
+                        stops: [0.0, 1.0],
+                        tileMode: TileMode.clamp
+                      )
+                    ),
                   ),
                 ),
                 SizedBox(height: _titleFocus.hasFocus ? MediaQuery.of(context).viewInsets.bottom + 20 : 20,)

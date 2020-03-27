@@ -20,6 +20,7 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
 
   var _homeStores = locator<HomeStores>();
+  SlidableController _slidableController = SlidableController();
 
   @override
   void initState() {
@@ -85,12 +86,16 @@ class _HomeViewState extends State<HomeView> {
                             );
                           } else {
                             return Slidable(
-                              closeOnScroll: false,
+                              controller: _slidableController,
+                              closeOnScroll: true,
                               actionExtentRatio: 0.17,
                               secondaryActions: <Widget>[
                                 Align(
                                   child: Parent(
-                                    gesture: Gestures()..onTap(() {}),
+                                    gesture: Gestures()..onTap(() {
+                                      _slidableController.activeState.close();
+                                      _homeStores.removeTask(index);
+                                    }),
                                     style: ParentStyle()..height(35)..width(35)..borderRadius(all: 35/2)..background.color(Color(0xFFFFCFCF))
                                       ..ripple(true)..margin(right: 33),
                                     child: Center(
@@ -104,11 +109,11 @@ class _HomeViewState extends State<HomeView> {
                                 isFirst: index == 0,
                                 onNotifyChanged: (value) {
                                   _homeStores.changeNotify(index, value);
-                                  setState(() {});
+                                  //setState(() {});
                                 },
                                 onCheckChanged: (value) {
                                   _homeStores.changeCheck(index, value);
-                                  setState(() {});
+                                  //setState(() {});
                                 },
                                 isLast: index == _homeStores.listTask.length - 1,
                                 item: _homeStores.listTask[index],

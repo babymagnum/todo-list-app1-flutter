@@ -29,14 +29,14 @@ mixin _$HomeStores on HomeStoresBase, Store {
   final _$listTaskAtom = Atom(name: 'HomeStoresBase.listTask');
 
   @override
-  List<TaskModel> get listTask {
+  ObservableList<TaskModel> get listTask {
     _$listTaskAtom.context.enforceReadPolicy(_$listTaskAtom);
     _$listTaskAtom.reportObserved();
     return super.listTask;
   }
 
   @override
-  set listTask(List<TaskModel> value) {
+  set listTask(ObservableList<TaskModel> value) {
     _$listTaskAtom.context.conditionallyRunInAction(() {
       super.listTask = value;
       _$listTaskAtom.reportChanged();
@@ -71,6 +71,26 @@ mixin _$HomeStores on HomeStoresBase, Store {
     final _$actionInfo = _$HomeStoresBaseActionController.startAction();
     try {
       return super.changeNotify(index, value);
+    } finally {
+      _$HomeStoresBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic addTask(TaskModel taskModel) {
+    final _$actionInfo = _$HomeStoresBaseActionController.startAction();
+    try {
+      return super.addTask(taskModel);
+    } finally {
+      _$HomeStoresBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic removeTask(int index) {
+    final _$actionInfo = _$HomeStoresBaseActionController.startAction();
+    try {
+      return super.removeTask(index);
     } finally {
       _$HomeStoresBaseActionController.endAction(_$actionInfo);
     }
