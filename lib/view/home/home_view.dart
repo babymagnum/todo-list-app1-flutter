@@ -48,9 +48,12 @@ class _HomeViewState extends State<HomeView> {
                 children: <Widget>[
                   _homeStores.isLoading ?
                   Align(
-                    child: SizedBox(
-                      width: 50, height: 50,
-                      child: CircularProgressIndicator(),
+                    child: Padding(
+                      padding: EdgeInsets.only(top: 15),
+                      child: SizedBox(
+                        width: 30, height: 30,
+                        child: CircularProgressIndicator(),
+                      ),
                     ),
                     alignment: Alignment.topCenter,
                   ) :
