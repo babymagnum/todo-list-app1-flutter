@@ -12,9 +12,7 @@ abstract class HomeStoresBase with Store {
   @observable
   bool isLoading = false;
 
-//  @observable
-//  List<TaskModel> listTask = List();
-
+  // we use ObservableList because, it will not work for add or remove if we use regular List class
   @observable
   ObservableList<TaskModel> listTask = ObservableList<TaskModel>.of([]);
 
@@ -56,12 +54,20 @@ abstract class HomeStoresBase with Store {
 
   @action
   changeCheck(int index, bool value) {
-    listTask[index].isCheck = value;
+    TaskModel newItem = listTask[index];
+    newItem.isCheck = value;
+    listTask.removeAt(index);
+    listTask.insert(index, newItem);
   }
 
   @action
   changeNotify(int index, bool value) {
-    listTask[index].isNotify = value;
+    TaskModel newItem = listTask[index];
+    newItem.isNotify = value;
+    // here we remove the selected index from list first
+    listTask.removeAt(index);
+    // then reinsert the new item in selected index
+    listTask.insert(index, newItem);
   }
 
   @action
