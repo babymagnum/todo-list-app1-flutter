@@ -53,28 +53,34 @@ class _ContainerViewState extends State<ContainerView> {
               child: Row(
                 children: <Widget>[
                   Expanded(
-                    child: Column(
-                      children: <Widget>[
-                        Image.asset('assets/images/ic_home.png', width: 23, height: 23,),
-                        SizedBox(height: 6,),
-                        Text('Home', style: ThemeTextStyle.rubikM.apply(
-                          color: _selectedIndex == 0 ? Color(0xFF5F87E7) : Color(0xFF9F9F9F), fontSizeDelta: -6
-                        ),)
-                      ],
+                    child: GestureDetector(
+                      onTap: () => _onItemTapped(0),
+                      child: Column(
+                        children: <Widget>[
+                          Image.asset('assets/images/ic_home.png', width: 23, height: 23, color: Color(_selectedIndex == 0 ? 0xFF5F87E7 : 0xFFBEBEBE),),
+                          SizedBox(height: 6,),
+                          Text('Home', style: ThemeTextStyle.rubikM.apply(
+                            color: _selectedIndex == 0 ? Color(0xFF5F87E7) : Color(0xFF9F9F9F), fontSizeDelta: -6
+                          ),)
+                        ],
+                      ),
                     )
                   ),
                   Expanded(
                     child: Container()
                   ),
                   Expanded(
-                    child: Column(
-                      children: <Widget>[
-                        Image.asset('assets/images/ic_task.png', width: 23, height: 23,),
-                        SizedBox(height: 6,),
-                        Text('Task', style: ThemeTextStyle.rubikM.apply(
-                          color: _selectedIndex == 1 ? Color(0xFF5F87E7) : Color(0xFF9F9F9F), fontSizeDelta: -6
-                        ),)
-                      ],
+                    child: GestureDetector(
+                      onTap: () => _onItemTapped(1),
+                      child: Column(
+                        children: <Widget>[
+                          Image.asset('assets/images/ic_task.png', width: 23, height: 23, color: Color(_selectedIndex == 1 ? 0xFF5F87E7 : 0xFFBEBEBE)),
+                          SizedBox(height: 6,),
+                          Text('Task', style: ThemeTextStyle.rubikM.apply(
+                            color: _selectedIndex == 1 ? Color(0xFF5F87E7) : Color(0xFF9F9F9F), fontSizeDelta: -6
+                          ),)
+                        ],
+                      ),
                     )
                   )
                 ],
