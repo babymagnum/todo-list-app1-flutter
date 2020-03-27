@@ -1,7 +1,7 @@
 import 'package:dribbble_clone/core/helper/locator.dart';
 import 'package:dribbble_clone/core/theme/theme_text_style.dart';
 import 'package:dribbble_clone/view/home/home_view.dart';
-import 'package:dribbble_clone/view/home/widgets/bottom_sheet_add_task.dart';
+import 'package:dribbble_clone/view/container/widgets/bottom_sheet_add_task.dart';
 import 'package:dribbble_clone/view/task/task_view.dart';
 import 'package:flutter/material.dart';
 import '../home/stores/home_stores.dart';

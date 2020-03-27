@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import '../../core/theme/theme_text_style.dart';
-import '../../core/widgets/placeholder_network_image.dart';
 import 'stores/home_stores.dart';
 
 class HomeView extends StatefulWidget {
